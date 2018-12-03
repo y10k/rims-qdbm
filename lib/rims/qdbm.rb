@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+require 'curia'
 require 'depot'
+require 'fileutils'
 require 'rims'
 require 'rims/qdbm/version'
 
@@ -91,6 +93,96 @@ module RIMS
       end
     end
     KeyValueStore::FactoryBuilder.add_plug_in('qdbm_depot', Depot_KeyValueStore)
+
+    class Curia_KeyValueStore < KeyValueStore
+      def initialize(curia, path)
+        @db = curia
+        @path = path
+        @closed = false
+      end
+
+      class << self
+        def exist?(path)
+          curia_path = path + '.qdbm_curia'
+          File.exist? curia_path
+        end
+
+        def curia_open(path, *optional)
+          curia = Curia.new(path, Curia::OWRITER | Curia::OCREAT, *optional)
+          curia.silent = true
+          curia
+        end
+
+        def open(name, *optional)
+          curia_path = name + '.qdbm_curia'
+          new(curia_open(curia_path), curia_path)
+        end
+
+        def open_with_conf(name, config)
+          bnum = config['bnum']
+          dnum = config['dnum']
+
+          args = []
+          args << bnum if bnum
+          args << dnum if dnum
+
+          open(name, *args)
+        end
+      end
+
+      def [](key)
+        @closed and raise 'closed'
+        @db[key]
+      end
+
+      def []=(key, value)
+        @closed and raise 'closed'
+        @db[key] = value
+      end
+
+      def delete(key)
+        @closed and raise 'closed'
+        ret_val = @db[key]
+        @db.out(key)
+        ret_val
+      end
+
+      def key?(key)
+        @closed and raise 'closed'
+        ! @db[key].nil?
+      end
+
+      def each_key
+        @closed and raise 'closed'
+        return enum_for(:each_key) unless block_given?
+        @db.each_key do |key|
+          yield(key)
+        end
+        self
+      end
+
+      def sync
+        @closed and raise 'closed'
+        @db.sync
+        self
+      end
+
+      def close
+        @closed and raise 'closed'
+        @db.close
+        @closed = true
+        self
+      end
+
+      def destroy
+        unless (@closed) then
+          raise "failed to destroy qdbm-curia that isn't closed: #{@path}"
+        end
+        FileUtils.rm_rf(@path)
+        nil
+      end
+    end
+    KeyValueStore::FactoryBuilder.add_plug_in('qdbm_curia', Curia_KeyValueStore)
   end
 end
 
