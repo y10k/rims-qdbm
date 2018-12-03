@@ -29,7 +29,7 @@ module RIMS
 
         def open(name, *optional)
           depot_path = name + '.qdbm_depot'
-          new(depot_open(depot_path), depot_path)
+          new(depot_open(depot_path, *optional), depot_path)
         end
 
         def open_with_conf(name, config)
@@ -115,7 +115,7 @@ module RIMS
 
         def open(name, *optional)
           curia_path = name + '.qdbm_curia'
-          new(curia_open(curia_path), curia_path)
+          new(curia_open(curia_path, *optional), curia_path)
         end
 
         def open_with_conf(name, config)
