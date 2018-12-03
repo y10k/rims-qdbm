@@ -1,38 +1,44 @@
-# Rims::Qdbm
+# RIMS::QDBM
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rims/qdbm`. To experiment with that code, run `bin/console` for an interactive prompt.
+RIMS key-value store plug-in for QDBM.
+This gem provides 2 plug-ins (`qdbm_depot` and `qdbm_curia`).
 
-TODO: Delete this and the text above, and describe your gem
+RIMS is IMAP sever and see https://github.com/y10k/rims.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rims-qdbm'
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}.git" }
+gem 'rims-qdbm', github: 'y10k/rims-qdbm'
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install rims-qdbm
-
 ## Usage
 
-TODO: Write usage instructions here
+Add these lines to your config.yml of RIMS:
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```yaml
+load_libraries:
+  - rims/qdbm
+meta_key_value_store:
+  plug_in: qdbm_depot
+  configuration:
+    bnum: 1200000
+text_key_value_store:
+  plug_in: qdbm_curia
+  configuration:
+    bnum: 50000
+    dnum: 8
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rims-qdbm.
+Bug reports and pull requests are welcome on GitHub at https://github.com/y10k/rims-qdbm.
 
 ## License
 
