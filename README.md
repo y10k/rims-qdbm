@@ -1,11 +1,13 @@
-# RIMS::QDBM
+RIMS::QDBM
+==========
 
 RIMS key-value store plug-in for QDBM.
 This gem provides 2 plug-ins (`qdbm_depot` and `qdbm_curia`).
 
 RIMS is IMAP sever and see https://github.com/y10k/rims.
 
-## Installation
+Installation
+------------
 
 Add this line to your application's Gemfile:
 
@@ -18,7 +20,8 @@ And then execute:
 
     $ bundle
 
-## Usage
+Usage
+-----
 
 Add these lines to your config.yml of RIMS:
 
@@ -36,10 +39,12 @@ text_key_value_store:
     dnum: 8
 ```
 
-## Contributing
+Contributing
+------------
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/y10k/rims-qdbm.
 
-## License
+License
+-------
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
