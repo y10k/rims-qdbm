@@ -123,8 +123,12 @@ module RIMS
           dnum = config['dnum']
 
           args = []
-          args << bnum if bnum
-          args << dnum if dnum
+          unless (dnum) then
+            args << bnum if bnum
+          else
+            args << bnum || -1
+            args << dnum
+          end
 
           open(name, *args)
         end
