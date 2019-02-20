@@ -2,9 +2,11 @@ RIMS::QDBM
 ==========
 
 RIMS key-value store plug-in for QDBM.
-This gem provides 2 plug-ins (`qdbm_depot` and `qdbm_curia`).
+By introducing this plug-in, RIMS IMAP server will be able to store
+mailboxes and messages in QDBM.  QDBM is Quick Database Manager of
+https://fallabs.com/qdbm/.
 
-RIMS is IMAP sever and see https://github.com/y10k/rims.
+This gem provides 2 plug-ins (`qdbm_depot` and `qdbm_curia`).
 
 Installation
 ------------
