@@ -11,7 +11,12 @@ Gem::Specification.new do |spec|
   spec.email         = ["toki@freedom.ne.jp"]
 
   spec.summary       = %q{RIMS key-value store plug-in for QDBM}
-  spec.description   = %q{RIMS key-value store plug-in for QDBM}
+  spec.description   = <<-'EOF'
+    RIMS key-value store plug-in for QDBM.  By introducing this
+    plug-in, RIMS IMAP server will be able to store mailboxes and
+    messages in QDBM.  QDBM is Quick Database Manager of
+    https://fallabs.com/qdbm/.
+  EOF
   spec.homepage      = "https://github/com/y10k/rims-qdbm"
   spec.license       = "MIT"
 
