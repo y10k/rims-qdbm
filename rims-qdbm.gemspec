@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
     messages in QDBM.  QDBM is Quick Database Manager of
     https://fallabs.com/qdbm/.
   EOF
-  spec.homepage      = "https://github/com/y10k/rims-qdbm"
+  spec.homepage      = "https://github.com/y10k/rims-qdbm"
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.
