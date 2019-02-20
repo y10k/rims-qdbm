@@ -11,16 +11,19 @@ This gem provides 2 plug-ins (`qdbm_depot` and `qdbm_curia`).
 Installation
 ------------
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile that includes RIMS:
 
 ```ruby
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}.git" }
-gem 'rims-qdbm', github: 'y10k/rims-qdbm'
+gem 'rims-qdbm'
 ```
 
 And then execute:
 
     $ bundle
+
+Or install it yourself as:
+
+    $ gem install rims-qdbm
 
 Usage
 -----
