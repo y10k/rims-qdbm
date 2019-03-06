@@ -27,6 +27,10 @@ module RIMS::Test
     def db_key?(key)
       ! @db[key].nil?
     end
+
+    def db_closed_error
+      DepotError_EMISC
+    end
   end
 
   class QDBMDepot_KeyValueStoreOpenCloseTest < Test::Unit::TestCase
@@ -63,6 +67,10 @@ module RIMS::Test
 
     def db_key?(key)
       ! @db[key].nil?
+    end
+
+    def db_closed_error
+      CuriaError_EMISC
     end
   end
 

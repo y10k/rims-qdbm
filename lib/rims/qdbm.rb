@@ -41,29 +41,24 @@ module RIMS
       end
 
       def [](key)
-        @closed and raise 'closed'
         @db[key]
       end
 
       def []=(key, value)
-        @closed and raise 'closed'
         @db[key] = value
       end
 
       def delete(key)
-        @closed and raise 'closed'
         ret_val = @db[key]
         @db.out(key)
         ret_val
       end
 
       def key?(key)
-        @closed and raise 'closed'
         ! @db[key].nil?
       end
 
       def each_key
-        @closed and raise 'closed'
         return enum_for(:each_key) unless block_given?
         @db.each_key do |key|
           yield(key)
@@ -72,13 +67,11 @@ module RIMS
       end
 
       def sync
-        @closed and raise 'closed'
         @db.sync
         self
       end
 
       def close
-        @closed and raise 'closed'
         @db.close
         @closed = true
         self
@@ -86,7 +79,7 @@ module RIMS
 
       def destroy
         unless (@closed) then
-          raise "failed to destroy qdbm-depot that isn't closed: #{@path}"
+          raise DepotError_EMISC,  "failed to destroy qdbm-depot that isn't closed: #{@path}"
         end
         File.delete(@path)
         nil
@@ -135,29 +128,24 @@ module RIMS
       end
 
       def [](key)
-        @closed and raise 'closed'
         @db[key]
       end
 
       def []=(key, value)
-        @closed and raise 'closed'
         @db[key] = value
       end
 
       def delete(key)
-        @closed and raise 'closed'
         ret_val = @db[key]
         @db.out(key)
         ret_val
       end
 
       def key?(key)
-        @closed and raise 'closed'
         ! @db[key].nil?
       end
 
       def each_key
-        @closed and raise 'closed'
         return enum_for(:each_key) unless block_given?
         @db.each_key do |key|
           yield(key)
@@ -166,7 +154,6 @@ module RIMS
       end
 
       def sync
-        @closed and raise 'closed'
         @db.sync
         self
       end
@@ -180,7 +167,7 @@ module RIMS
 
       def destroy
         unless (@closed) then
-          raise "failed to destroy qdbm-curia that isn't closed: #{@path}"
+          raise CuriaError_EMISC,  "failed to destroy qdbm-curia that isn't closed: #{@path}"
         end
         FileUtils.rm_rf(@path)
         nil
